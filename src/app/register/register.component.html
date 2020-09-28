@@ -1,0 +1,38 @@
+<h2>Registrar usuario</h2>
+<div style="margin-top: 100px; display: flex; justify-content: center">
+  <form
+    [formGroup]="registerForm"
+    novalidate
+    (ngSubmit)="onSubmit(registerForm)"
+  >
+    <p-card>
+      <div class="p-fluid">
+        <div class="p-field">
+          <label for="firstname1">Usuario</label>
+          <input
+            formControlName="Email"
+            type="text"
+            pInputText
+            autocomplete="off"
+          />
+        </div>
+        <div class="p-field">
+          <label for="lastname1">Contraseña</label>
+          <input formControlName="Password" type="password" pInputText />
+        </div>
+        <div class="p-field">
+          <label for="lastname1">Repetir Contraseña</label>
+          <input formControlName="ConfirmPassword" type="password" pInputText />
+        </div>
+      </div>
+      <p-footer>
+        <button
+          pButton
+          [disabled]="registerForm.invalid"
+          type="submit"
+          label="Registrar"
+        ></button>
+      </p-footer>
+    </p-card>
+  </form>
+</div>

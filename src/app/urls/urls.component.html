@@ -1,0 +1,94 @@
+<p-card>
+  <p-toolbar styleClass="p-mb-4">
+    <ng-template pTemplate="left">
+      <button
+        pButton
+        pRipple
+        label="Agregar"
+        icon="pi pi-plus"
+        class="p-button-success p-mr-2"
+        (click)="openNew()"
+      ></button>
+    </ng-template>
+  </p-toolbar>
+  <p-table
+    [value]="url"
+    [paginator]="true"
+    [rows]="10"
+    [showCurrentPageReport]="true"
+  >
+    <ng-template pTemplate="header">
+      <tr>
+        <th>Descripcion</th>
+        <th>Url</th>
+        <th>Visitas</th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-url>
+      <tr>
+        <td>
+          {{ url.description }}
+        </td>
+        <td>
+          <a [routerLink]="" (click)="openSite(url)">{{ url.shortUrl }}</a>
+        </td>
+        <td>{{ url.visitorCount }}</td>
+      </tr>
+    </ng-template>
+  </p-table>
+</p-card>
+
+<p-dialog
+  header="Agregar"
+  [(visible)]="showNew"
+  [style]="{ width: '450px' }"
+  header="Agregar nueva url"
+  [modal]="true"
+  styleClass="p-fluid"
+>
+  <ng-template pTemplate="content">
+    <form [formGroup]="urlForm" novalidate (ngSubmit)="onSubmit(urlForm)">
+      <input formControlName="AplicationUserId" style="display: none" />
+
+      <div class="p-field">
+        <label for="name">Url</label>
+        <input
+          type="text"
+          formControlName="LongUrl"
+          pInputText
+          id="name"
+          autofocus
+        />
+        <!--<small class="p-invalid">Name is required.</small>-->
+      </div>
+      <div class="p-field">
+        <label>Descripcion</label>
+        <textarea
+          pInputTextarea
+          formControlName="Description"
+          rows="3"
+          cols="20"
+        ></textarea>
+      </div>
+
+      <button
+        pButton
+        pRipple
+        label="Guardar"
+        icon="pi pi-check"
+        class="p-button-text"
+        [disabled]="urlForm.invalid"
+        type="submit"
+      ></button>
+
+      <button
+        pButton
+        pRipple
+        label="Cancelar"
+        icon="pi pi-times"
+        class="p-button-text"
+        (click)="hideDialog()"
+      ></button>
+    </form>
+  </ng-template>
+</p-dialog>

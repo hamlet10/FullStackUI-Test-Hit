@@ -1,0 +1,36 @@
+<div style="margin-top: 100px; display: flex; justify-content: center">
+  <form [formGroup]="loginForm" novalidate (ngSubmit)="onSubmit(loginForm)">
+    <p-card>
+      <div class="p-fluid">
+        <div class="p-field">
+          <label for="firstname1">Usuario</label>
+          <input
+            formControlName="UserName"
+            type="text"
+            pInputText
+            autocomplete="off"
+          />
+        </div>
+        <div class="p-field">
+          <label for="lastname1">Contrasena</label>
+          <input formControlName="Password" type="password" pInputText />
+        </div>
+      </div>
+      <p-footer>
+        <button
+          pButton
+          [disabled]="loginForm.invalid"
+          type="submit"
+          label="Login"
+        ></button>
+        &nbsp;&nbsp;
+        <button
+          pButton
+          type="button"
+          label="Registrar"
+          (click)="navigateToRegister()"
+        ></button>
+      </p-footer>
+    </p-card>
+  </form>
+</div>
