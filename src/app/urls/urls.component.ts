@@ -10,7 +10,7 @@ import { ShortenerServicesService } from '../shortener-services.service';
 export class UrlsComponent implements OnInit {
   url: any;
   ip: string;
-  showNew: boolean = false;
+  showNew = false;
   urlForm: FormGroup;
 
   constructor(
@@ -20,7 +20,6 @@ export class UrlsComponent implements OnInit {
 
   ngOnInit(): void {
     this.getData();
-
     this._shortenerService.getIP().subscribe((res) => {
       (this.ip = res.ip), console.log(res.ip);
     });
@@ -42,9 +41,13 @@ export class UrlsComponent implements OnInit {
 
   getData() {
     let userId = localStorage.getItem('UserId');
+    if (userId == null) {
+      userId = 0;
+    }
     this._shortenerService.getAllUrls(userId).subscribe((data) => {
       this.url = data;
       console.log(data);
+      console.log('userId: ' + userId);
     });
   }
 
